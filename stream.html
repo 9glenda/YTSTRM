@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Video Streaming API</title>
+    <style>
+        /* Add some styles to the body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        
+        /* Style the header */
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            color: #ff0000;
+            margin-top: 50px;
+        }
+
+        /* Style the form */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        label {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        input[type=text] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+            width: 50%;
+            font-size: 1em;
+        }
+        
+        button[type=submit] {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 1em;
+        }
+        
+        /* Style the video player */
+        #player {
+            width: 640px;
+            height: 480px;
+            margin: 50px auto;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Video Streaming API</h1>
+    <form action="/stream" method="get">
+        <label for="video-id">Video ID or URL:</label>
+        <input type="text" id="video-id" name="id" required>
+        <br>
+        <button type="submit">Stream Video</button>
+    </form>
+    <br>
+    <div id="player"></div>
+    <script>
+        const form = document.querySelector('form');
+        const player = document.querySelector('#player');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const videoId = encodeURIComponent(form.elements.id.value);
+            player.innerHTML = `
+                <video width="640" height="480" controls>
+                    <source src="/stream?id=${videoId}" type="video/mp4">
+                </video>
+            `;
+        });
+    </script>
+</body>
+</html>
